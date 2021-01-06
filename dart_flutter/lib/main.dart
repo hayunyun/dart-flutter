@@ -1,41 +1,37 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(new MyApp());
 
-class MyApp extends StatelessWidget {
-  int _counter =0;
-
-  void _incrementCounter(){
-
-    _counter++;
-    print('_incrementCounter : $_counter');
-  }
-
+class MyApp extends StatelessWidget{
   @override
-  Widget build(BuildContext context){
-    print('StatelessWidget TestApp build');
-    return new MaterialApp( title: 'StatelessWidget Test App',
-    home:Scaffold(
-      appBar: AppBar(
-        title: Text('StatelessWidget Demo'),
-      ),
-      body : Center(
-        child: Column(
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+      title: 'Flutter Demo App',
+      home: new Scaffold(
+        appBar: new AppBar(
+          title: const Text('Container Demo'),
+        ),
+        body: Row(
+          mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
+              '1',
+              style:TextStyle(fontSize: 30.0),
             ),
-          ],
-        ),
-      ),
-    floatingActionButton: FloatingActionButton(
-      onPressed: _incrementCounter,
-    tooltip: 'Increment',
-    child: Icon(Icons.add),
-    ),
-    ),
-    );
+            Text(
+              '2',
+              style: TextStyle(fontSize: 30.0),
+            ),
+            Text(
+              '3',
+              style: TextStyle(fontSize:30.0),
+            ),
+          ]),
+       ),
+      );
+
   }
 }
+
