@@ -35,7 +35,7 @@ class MyAppState extends State<MyApp> {
                 color: _curIndex == 0 ? Colors.blue : Colors.black54,
               ),
 
-          /*title: Text(
+              /*title: Text(
                 "HOME",
                 style: TextStyle(
                     fontSize: 15,
@@ -43,7 +43,7 @@ class MyAppState extends State<MyApp> {
               ),
 
            */
-          label:'HOME',
+              label:'HOME',
 
 
             ),
@@ -75,7 +75,7 @@ class MyAppState extends State<MyApp> {
               label:'SETTINGS',
 
 
-             /* title: Text(
+              /* title: Text(
                 "SETTINGS",
                 style: TextStyle(
                     fontSize: 15,
