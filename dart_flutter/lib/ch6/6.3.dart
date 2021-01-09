@@ -10,13 +10,13 @@ class StateDemo extends StatelessWidget {
     return Provider<String>.value(
       value: 'Shared Data',
       child: MaterialApp(
-        title: 'Flutter Demo App',
-        initialRoute:'/page1',
-        routes:{
-          '/page1': (context) =>FirstPage(),
-          '/page2': (context) => SecondPage(),
+          title: 'Flutter Demo App',
+          initialRoute:'/page1',
+          routes:{
+            '/page1': (context) =>FirstPage(),
+            '/page2': (context) => SecondPage(),
 
-        }
+          }
       ),
     );
   }

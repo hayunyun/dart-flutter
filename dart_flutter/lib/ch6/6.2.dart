@@ -1,27 +1,17 @@
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-void main() => runApp(StateDemo());
+void main() => runApp(WidgetDemo());
 
-class StateDemo extends StatelessWidget {
+class WidgetDemo extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    return Provider<String>.value(
-      value: 'Shared Data',
-      child: MaterialApp(
-        title: 'Flutter Demo App',
-        initialRoute:'/page1',
-        routes:{
-          '/page1': (context) =>FirstPage(),
-          '/page2': (context) => SecondPage(),
-
-        }
-      ),
+    return MaterialApp(
+      title:'Flutter Demo App',
+      home: FirstPage(),
     );
   }
 }
-
 
 class FirstPage extends StatefulWidget {
   @override
