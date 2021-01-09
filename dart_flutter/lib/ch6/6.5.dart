@@ -20,8 +20,8 @@ class StateDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<Counter>(
-     create: (_) => Counter(),
-        child:MaterialApp(
+      create: (_) => Counter(),
+      child:MaterialApp(
           title:'Flutter Demo App',
           initialRoute: '/page1',
           routes: {
@@ -29,7 +29,7 @@ class StateDemo extends StatelessWidget {
             '/page2' : (context) => SecondPage(),
           }
 
-        ),
+      ),
     );
 
 
@@ -59,18 +59,18 @@ class FirstPageState extends State<FirstPage>{
             Center(
               child: RaisedButton(
                 onPressed: (){
-                            Navigator.pushNamed(context, '/page2');
-                            },
-                   child: Text('Go to next page'),
-                        ),
-                    ),
+                  Navigator.pushNamed(context, '/page2');
+                },
+                child: Text('Go to next page'),
+              ),
+            ),
 
-               Text('${Counter.number}'),
-             ],
+            Text('${Counter.number}'),
+          ],
         )
         floatingActionButton : FlatingActionButton(
-          onPressed: () {
-            counter.add();
+        onPressed: () {
+      counter.add();
     },
     child:Icon(Icons.add),
     backgroundColor: Colors.blue,
@@ -80,7 +80,7 @@ class FirstPageState extends State<FirstPage>{
 
 
 
-  }
+    }
 }
 
 
@@ -107,15 +107,15 @@ class SecondPage extends StatelessWidget{
               ),
             ),
             Consumer<Counter>(
-              builder: (context, counter, child){
-                return Text('${counter.number}');
-              }
+                builder: (context, counter, child){
+                  return Text('${counter.number}');
+                }
             )
           ],
         )
         floatingActionButton: FloatingActionButton(
         onPressed: (){
-          counter.add();
+      counter.add();
     },
     child: Icon(Icons.add),
     backgroundColor: Colors.blue,
@@ -123,5 +123,5 @@ class SecondPage extends StatelessWidget{
 
 
     );
-  }
+    }
 }

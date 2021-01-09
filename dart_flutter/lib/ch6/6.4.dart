@@ -4,24 +4,15 @@ import 'package:provider/provider.dart';
 
 void main() => runApp(StateDemo());
 
-class Counter extends ChangeNtifier{
-  int number =0;
-
-  void add(){
-    number++;
-    notifyListeners();
-  }
-}
-
-
-
-
 class StateDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<Counter>(
-     create: (_) => Counter(),
-        child:MaterialApp(
+    return MultiProvider(
+      providers: [
+        Provider<String>.value(value: 'Shared Data'),
+        Provider<int>.value(value:100),
+      ],
+      child:MaterialApp(
           title:'Flutter Demo App',
           initialRoute: '/page1',
           routes: {
@@ -29,7 +20,7 @@ class StateDemo extends StatelessWidget {
             '/page2' : (context) => SecondPage(),
           }
 
-        ),
+      ),
     );
 
 
@@ -44,11 +35,13 @@ class FirstPage extends StatefulWidget {
 }
 
 class FirstPageState extends State<FirstPage>{
-  var counter;
+  var data;
+  var number;
 
   @override
   Widget build(BuildContext context){
-    counter = Provider.of<Counter>(context, listen: true);
+    data=Provider.of<String>(context, listen: true);
+    number=Provider.of<int>(context, listen: true);
     return Scaffold(
         appBar: AppBar(
           title: Text('First Page'),
@@ -59,25 +52,15 @@ class FirstPageState extends State<FirstPage>{
             Center(
               child: RaisedButton(
                 onPressed: (){
-                            Navigator.pushNamed(context, '/page2');
-                            },
-                   child: Text('Go to next page'),
-                        ),
-                    ),
+                  Navigator.pushNamed(context, '/page2');
+                },
+                child: Text('Go to next page'),
+              ),
+            ),
 
-               Text('${Counter.number}'),
-             ],
-        )
-        floatingActionButton : FlatingActionButton(
-          onPressed: () {
-            counter.add();
-    },
-    child:Icon(Icons.add),
-    backgroundColor: Colors.blue,
-    ),
-
-    );
-
+            Text('$data $number'),
+          ],
+        ));
 
 
   }
@@ -85,12 +68,12 @@ class FirstPageState extends State<FirstPage>{
 
 
 class SecondPage extends StatelessWidget{
-  var counter;
+  final String data;
 
+  SecondPage({@required  this.data});
 
   @override
   Widget build(BuildContext context){
-    counter = Provider.of<Counter>(context, listen: false);
     return Scaffold(
         appBar: AppBar(
           title: Text("Second Page"),
@@ -106,22 +89,13 @@ class SecondPage extends StatelessWidget{
                 child: Text('go to previous page'),
               ),
             ),
-            Consumer<Counter>(
-              builder: (context, counter, child){
-                return Text('${counter.number}');
-              }
-            )
+            Consumer2<string, int>(
+              builder:(context, value,number, child){
+                return Text('$Value $number');
+              },
+            ),
           ],
         )
-        floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          counter.add();
-    },
-    child: Icon(Icons.add),
-    backgroundColor: Colors.blue,
-    ),
-
-
     );
   }
 }
