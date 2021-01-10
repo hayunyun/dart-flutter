@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 void main() => runApp(StateDemo());
 
-class Counter extends ChangeNtifier{
+class Counter extends ChangeNotifier{
   int number =0;
 
   void add(){
@@ -65,10 +65,10 @@ class FirstPageState extends State<FirstPage>{
               ),
             ),
 
-            Text('${Counter.number}'),
+            Text('${counter.number}'),
           ],
-        )
-        floatingActionButton : FlatingActionButton(
+        ),
+        floatingActionButton : FloatingActionButton(
         onPressed: () {
       counter.add();
     },
@@ -112,7 +112,7 @@ class SecondPage extends StatelessWidget{
                 }
             )
           ],
-        )
+        ),
         floatingActionButton: FloatingActionButton(
         onPressed: (){
       counter.add();

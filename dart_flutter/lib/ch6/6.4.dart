@@ -89,9 +89,9 @@ class SecondPage extends StatelessWidget{
                 child: Text('go to previous page'),
               ),
             ),
-            Consumer2<string, int>(
+            Consumer2<String, int>(
               builder:(context, value,number, child){
-                return Text('$Value $number');
+                return Text('$value $number');
               },
             ),
           ],
