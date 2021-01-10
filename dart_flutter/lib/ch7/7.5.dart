@@ -23,7 +23,7 @@ class FirstPage extends StatelessWidget {
       body: GestureDetector(
         onTap: (){
           Navigator.push(
-            context,MaterialPageRoute(builder : (context) => SecondPage()));
+              context,MaterialPageRoute(builder : (context) => SecondPage()));
         },
         child : Hero(
           tag: 'icon',
@@ -46,18 +46,18 @@ class SecondPage extends StatelessWidget {
       appBar : new AppBar(
         title: const Text('Hero Demo SecondPage'),
       ),
-    body: Center (
-      child: GestureDetector(
-        onTap: () {
-          Navigator.pop(context);
-        },
-        child: Hero(
-          tag: 'icon',
-          child : Icon(
-            Icons.sentiment_satisfied,
-            size: 200.0,
-          color: Colors.blue,
-           ),
+      body: Center (
+        child: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Hero(
+            tag: 'icon',
+            child : Icon(
+              Icons.sentiment_satisfied,
+              size: 200.0,
+              color: Colors.blue,
+            ),
           ),
         ),
       ),
