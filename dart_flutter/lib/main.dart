@@ -12,10 +12,11 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:weather/weather.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 
 void main(){
-  runApp(Phoneix(
+  runApp(Phoenix(
     child: new AlarmWeather(),
   ));
 }
@@ -103,7 +104,7 @@ Future<bool> saveAlarmID(int listID, int alarmID) async {
 
 Future<int> getAlarmID(int listID) async{
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  return prefs.getInt('alarm_id'+ listID.toString()) ?? 100;
+  return prefs.getInt('alarm_id_'+ listID.toString()) ?? 100;
 
 }
 
@@ -182,6 +183,9 @@ class AlarmInfo{
 
   setAlarmTime(TimeOfDay time){
     _alarmTime = time;
+  }
+  getAlarmTime(){
+    return _alarmTime;
   }
   setAlarmOn(bool on){
     _isAlarmOn = on;
@@ -345,14 +349,14 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  final List<AlarmInfo> alarmList = <AlarmInfo>[];
-  int _curPageIndex = 0;
-  String _weatherStr;
-  DateTime _date = DateTime.now();
-  TimeOfDay _time = TimeOfDay.now();
   bool _isAlarmOn = false;
   int _alarmID = 0;
+  DateTime _date = DateTime.now();
+  TimeOfDay _time = TimeOfDay.now();
+  int _curPageIndex = 0;
   int _listIndex = 0;
+  final List<AlarmInfo> alarmList = <AlarmInfo>[];
+  String _weatherStr;
 
   Future<Null> getInitData() async {
     var count = await getAlarmCount();
@@ -576,13 +580,15 @@ class _MainPageState extends State<MainPage> {
       tooltip: 'Add Alarm',
       child: Icon(Icons.alarm_add),
       onPressed: () {
-        selectDate(context).then((vale){
+        selectDate(context).then((value){
           _date = value;
           if(_date != null){
            selectTime(context).then((value){
              _time = value;
              if(_time!=null){
                _date=DateTime(_date.year, _date.month, _date.day,_time.hour, _time.minute);
+               setAlarmManager();
+               addItemToList();
           }
           else {
             _time = TimeOfDay.now();
@@ -714,14 +720,14 @@ void setRebirth(BuildContext context) {
     if(message == 'start'){
       print('rebirth received $message');
       AndroidIntent intent = AndroidIntent(
-          package: 'com.project.alarm_weather.MainActivity',
+          package: 'com.project.alarm_weather',
+          componentName: 'com.project.alarm_weather.MainActivity',
           flags: <int>[
             Flag.FLAG_ACTIVITY_CLEAR_TOP,
             Flag.FLAG_ACTIVITY_SINGLE_TOP
-          ]
-      );
+          ]);
       intent.launch();
-      Navigator.pushReplacement(context, '/page2');
+      Navigator.pushReplacementNamed(context, '/page2');
       receivePort.close();
       IsolateNameServer.removePortNameMapping('rebirth');
 
